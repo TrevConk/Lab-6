@@ -14,7 +14,7 @@ class LED8x8:
     def display(self, row):
         #self.shifterColumn.shiftByte(LED8x8.pattern[row])
         #self.shifterRow.shiftByte(LED8x8.rowsern[row])
-        self.shifter.shiftByte(0b00111100,0b10000000)
+        self.shifter.shiftByte(LED8x8.pattern[row],LED8x8.rowsern[row])
         print(LED8x8.pattern[row])
 
 
