@@ -10,6 +10,6 @@ try:
         for row in range(8):
             display.display(row)
             print(row)
-            time.sleep(.1)
+            time.sleep(.01)
 except Exception as e:
     print(e)
