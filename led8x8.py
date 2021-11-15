@@ -13,8 +13,10 @@ class LED8x8:
         self.shifterRow = Shifter(rowData, latch, clock)
         
     def display(self, row):
-        self.shifterRow.shiftByte(LED8x8.rows[row])
-        self.shifterColumn.shiftByte(LED8x8.pattern[row])
+        #self.shifterRow.shiftByte(LED8x8.rows[row])
+        #self.shifterColumn.shiftByte(LED8x8.pattern[row])
+        self.shifterRow.shiftByte(0b1000000)
+        self.shifterColumn.shiftByte(0b00111100)
         print(LED8x8.pattern[row])
 
 
