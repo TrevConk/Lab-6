@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import time
 
 
-class Shifter(object):
+class Shifter():
     #'Shift register class'
     def __init__(self, data, latch, clock):
         self.dataPin, self.latchPin, self.clockPin = data, latch, clock
