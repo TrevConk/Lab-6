@@ -7,9 +7,9 @@ currentDisplay = LED8x8(columnDataPin, rowDataPin, latchPin, clockPin)
 
 try:
     while True:
-        for row in range(7):
+        for row in range(8):
             currentDisplay.display(row)
-            time.sleep(1)
+            #time.sleep(.1)
             print(row)
 except Exception as e:
     print(e)
