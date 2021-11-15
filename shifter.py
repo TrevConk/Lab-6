@@ -2,12 +2,13 @@ import RPi.GPIO as GPIO
 import time
 
 
-class Shifter():
+class Shifter(object):
     #'Shift register class'
-    def __init__(self, data, latch, clock):
-        self.dataPin, self.latchPin, self.clockPin = data, latch, clock
+    def __init__(self, dataColumn, dataRow, latch, clock):
+        self.dataPinColumn, self.dataPinRow, self.latchPin, self.clockPin = dataColumn, dataRow, latch, clock
         GPIO.setmode(GPIO.BCM)
-        GPIO.setup(self.dataPin, GPIO.OUT)
+        GPIO.setup(self.dataPinColumn, GPIO.OUT)
+        GPIO.setup(self.dataPinRow, GPIO.OUT)
         GPIO.setup(self.latchPin, GPIO.OUT, initial=0)
         GPIO.setup(self.clockPin, GPIO.OUT, initial=0)
 
@@ -16,9 +17,10 @@ class Shifter():
         time.sleep(0)
         GPIO.output(pin, 0)
 
-    def shiftByte(self, byteVal):  # display a given byte pattern
+    def shiftByte(self, byteValColumn, byteValRow):  # display a given byte pattern
         for i in range(8):           # 8 bits in register
             #GPIO.output(self.dataPin, ~(byteVal & (1 << i)))  # if common anode
-            GPIO.output(self.dataPin, byteVal & (1<<i))    # if common cathode
+            GPIO.output(self.dataPinColumn, byteValColumn & (1<<i))    # if common cathode
+            GPIO.output(self.dataPinRow, byteValRow & (1<<i))
             self.ping(self.clockPin)
         self.ping(self.latchPin)
