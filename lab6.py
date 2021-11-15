@@ -9,6 +9,7 @@ try:
     while True:
         for row in range(7):
             currentDisplay.display(row)
+            time.sleep(.1)
             print(row)
 except Exception as e:
     print(e)
