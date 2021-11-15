@@ -10,6 +10,5 @@ try:
         for row in range(8):
             display.display(row)
             print(row)
-            time.sleep(.01)
 except Exception as e:
     print(e)
