@@ -1,11 +1,14 @@
 import time
 from led8x8 import LED8x8
 
-columnDataPin, rowDataPin, latchPin, clockPin = 22, 23, 24, 25
+columnDataPin, rowDataPin, latchPin, clockPin = 23, 21, 24, 25
 
 display = LED8x8(columnDataPin, rowDataPin, latchPin, clockPin)
 
-while True:
-    for row in 8:
-        display.display(row)
-        time.sleep(.1)
+try:
+    while True:
+        for row in 8:
+            display.display(row)
+            time.sleep(.1)
+except Exception as e:
+    print(e)
