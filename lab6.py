@@ -2,8 +2,9 @@ import multiprocessing
 import numpy as np
 import time
 
-pattern = [0,0,0,0,0,0,0,0]
-#pattern = multiprocessing.Array('i',8)
+#pattern = [0,0,0,0,0,0,0,0]
+pattern = multiprocessing.Array('i',8)
+myValue = multiprocessing.Value('i')
 pattern[0] = 127
 pattern[1] = 255
 pattern[2] = 255
@@ -35,8 +36,9 @@ def pattern2array(array):
 
 
 
-def randomWalk(pattern):
-    array = pattern[:]
+def randomWalk(pattern, myValue):
+    array = [0,0,0,0,0,0,0,0]
+    array = pattern
     condensedArray = pattern2array(array)
     print(condensedArray)
     for i in range(2):
@@ -50,7 +52,8 @@ def randomWalk(pattern):
         else:
             condensedArray[i] = condensedArray[i] + np.random.randint(-1, 2)
     print(condensedArray)
-    pattern = array2pattern(condensedArray)
+    for i in range(8):
+        pattern[i] = array2pattern(condensedArray)[i]
     time.sleep(.1)
 
 #try:
@@ -62,13 +65,14 @@ def randomWalk(pattern):
 #except Exception as e:
 #    print(e)
 try:
-    p = multiprocessing.Process(name='randomWalk', target=randomWalk, args=(pattern,))
+    p = multiprocessing.Process(target=randomWalk, args=(pattern, myValue))
+
     p.start()
 
-    while(True):
-        print(pattern[:])
-        time.sleep(1)
+    print(pattern[:])
+    time.sleep(1)
 
+    p.join()
 
 
 except Exception as e:
