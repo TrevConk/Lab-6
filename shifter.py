@@ -22,3 +22,6 @@ class Shifter():
             GPIO.output(self.dataPin, byteVal & (1<<i))    # if common cathode
             self.ping(self.clockPin)
         self.ping(self.latchPin)
+    
+    def latch(self):
+        self.ping(self.latchPin)
