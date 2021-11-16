@@ -16,10 +16,11 @@ class LED8x8:
        self.shifter.shiftByte(pattern,LED8x8.rowsern[num]) #for smilie output
     
 
+#comment in for smilie
 
-theDisplay = LED8x8(LED8x8.columnDataPin, LED8x8.rowDataPin, LED8x8.latchPin, LED8x8.clockPin)
+#theDisplay = LED8x8(LED8x8.columnDataPin, LED8x8.rowDataPin, LED8x8.latchPin, LED8x8.clockPin)
 
-while True:
-  for n in range(8):
-      theDisplay.display(n)
-      time.sleep(.001)
+#while True:
+#  for n in range(8):
+#      theDisplay.display(n)
+#      time.sleep(.001)
