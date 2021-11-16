@@ -22,7 +22,8 @@ class LED8x8:
         print(LED8x8.pattern[row])
     
 
-    theDisplay = LED8x8()
+
+theDisplay = LED8x8()
 
 while True:
   theDisplay.display()
