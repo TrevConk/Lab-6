@@ -23,7 +23,7 @@ class LED8x8:
     
 
 
-theDisplay = LED8x8()
+theDisplay = LED8x8(LED8x8.columnDataPin, LED8x8.latchPin, LED8x8.clockPin)
 
 while True:
   theDisplay.display()
