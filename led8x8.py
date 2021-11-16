@@ -13,7 +13,7 @@ class LED8x8:
         self.shifter = Shifter(columnDataPin, rowDataPin, latchPin, clockPin)
         
     def display(self, num):
-        self.shifter.shiftByte(LED8x8.pattern[num],LED8x8.rowsern[num])
+       self.shifter.shiftByte(LED8x8.pattern[num],LED8x8.rowsern[num]) #for smilie output
     
 
 
