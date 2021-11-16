@@ -20,6 +20,6 @@ class LED8x8:
 theDisplay = LED8x8(LED8x8.columnDataPin, LED8x8.rowDataPin, LED8x8.latchPin, LED8x8.clockPin)
 
 while True:
-  for n in range(LED8x8.pattern):
+  for n in range(8):
       theDisplay.display(n)
       time.sleep(.001)
