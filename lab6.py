@@ -1,3 +1,4 @@
+from led8x8 import LED8x8
 import multiprocessing
 import numpy as np
 import time
@@ -22,12 +23,12 @@ def array2pattern(array):
         for col in range(8):
             if row == array[0] and col == array[1]:
                 currentVals[col] = 0
-        print(int("".join(str(x) for x in currentVals), 2))
+        #print(int("".join(str(x) for x in currentVals), 2))
         returnValues[row] = int("".join(str(x) for x in currentVals), 2)
     return returnValues
 
 def pattern2array(array):
-    print('in pattern2array')
+    #print('in pattern2array')
     for row in range(8):
         currentRow = '{0:08b}'.format(array[row])
         if '0' in currentRow:
@@ -37,16 +38,14 @@ def pattern2array(array):
 
 
 def randomWalk(pattern, myValue):
+  while True:
     array = [0,0,0,0,0,0,0,0]
     array = pattern
     condensedArray = pattern2array(array)
     print(condensedArray)
     for i in range(2):
         if condensedArray[i] == 0:
-            print('in zero')
-            randomDebug = np.random.randint(0, 2)
-            print(randomDebug)
-            condensedArray[i] = condensedArray[i] + randomDebug
+            condensedArray[i] = condensedArray[i] + np.random.randint(0, 2)
         elif condensedArray[i] == 7:
             condensedArray[i] = condensedArray[i] + np.random.randint(-1, 1)
         else:
@@ -54,6 +53,7 @@ def randomWalk(pattern, myValue):
     print(condensedArray)
     for i in range(8):
         pattern[i] = array2pattern(condensedArray)[i]
+    print(pattern[:])
     time.sleep(.1)
 
 #try:
@@ -66,14 +66,13 @@ def randomWalk(pattern, myValue):
 #    print(e)
 try:
     p = multiprocessing.Process(target=randomWalk, args=(pattern, myValue))
-
     p.start()
+    theDisplay = LED8x8(LED8x8.columnDataPin, LED8x8.rowDataPin, LED8x8.latchPin, LED8x8.clockPin)
 
-    print(pattern[:])
-    time.sleep(1)
-
-    p.join()
-
+    while True:
+        for n in range(8):
+            theDisplay.display(n,pattern[n])
+            time.sleep(.001)
 
 except Exception as e:
     print(e)
